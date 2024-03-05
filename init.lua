@@ -325,6 +325,9 @@ vim.o.termguicolors = true
 -- Line length hint
 vim.wo.colorcolumn = "100"
 
+-- Set default tab width
+vim.bo.tabstop = 4
+
 -- [[ Basic Keymaps ]]
 
 -- Custom movement
@@ -552,7 +555,8 @@ local on_attach = function(_, bufnr)
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
+    -- vim.lsp.buf.format()
+    require("conform").format({ lsp_fallback = true })
   end, { desc = 'Format current buffer with LSP' })
 end
 
